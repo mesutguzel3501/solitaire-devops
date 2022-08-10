@@ -9,7 +9,7 @@ steps:
 substitutions:
   _GOOGLE_REGISTRY_URL: ${_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_GOOGLE_REPOSITORY}
   _IMAGE_NAME: solitaire
-  _GOOGLE_REPOSITORY: mesutguzel
+  _GOOGLE_REPOSITORY: release
   _LOCATION: us-central1
 
 images:

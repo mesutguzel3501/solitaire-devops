@@ -4,7 +4,7 @@ steps:
 - id: docker-build
   name: 'gcr.io/cloud-builders/docker'
   entrypoint: sh
-  args: ['-c', 'docker build -t $_GOOGLE_REGISTRY_URL/$_IMAGE_NAME:2.0.0']
+  args: ['-c', 'docker build -t $_GOOGLE_REGISTRY_URL/$_IMAGE_NAME:2.0.0', '.']
 
 substitutions:
   _GOOGLE_REGISTRY_URL: ${_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_GOOGLE_REPOSITORY}

@@ -1,0 +1,16 @@
+
+
+steps:
+- id: docker-build
+  name: 'gcr.io/cloud-builders/docker'
+  entrypoint: sh
+  args: ['-c', 'docker build -t $_GOOGLE_REGISTRY_URL/$_IMAGE_NAME:$SHORT_SHA -t $_GOOGLE_REGISTRY_URL/$_IMAGE_NAME:$(cat VERSION) . -f docker/Dockerfile']
+
+substitutions:
+  _GOOGLE_REGISTRY_URL: ${_LOCATION}-docker.pkg.dev/${PROJECT_ID}/${_GOOGLE_REPOSITORY}
+  _IMAGE_NAME: docs-as-code
+  _GOOGLE_REPOSITORY: release
+  _LOCATION: us-central1
+
+images:
+  - $_GOOGLE_REGISTRY_URL/$_IMAGE_NAME

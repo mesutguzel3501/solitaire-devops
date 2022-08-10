@@ -2,15 +2,15 @@ steps:
 - id: containerize
   name: gcr.io/cloud-builders/docker
   args: ["build", 
-    "-t", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:latest",
+    "-t", "us-central1-docker.pkg.dev/${PROJECT_ID}/$_SERVICE:latest",
     "."]
 - id: push
   name: gcr.io/cloud-builders/docker
-  args: ["push", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:latest"]
+  args: ["push", "us-central1-docker.pkg.dev/${PROJECT_ID}/$_SERVICE:latest"]
 - id: deploy
   name: gcr.io/cloud-builders/gcloud
   args: ["run", "deploy", "$_SERVICE",
-    "--image=us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:build-$BUILD_ID"
+    "--image=us-central1-docker.pkg.dev/${PROJECT_ID}/$_SERVICE:build-$BUILD_ID"
   ]
 substitutions:
   _SERVICE: solitaire

@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blue
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: blue
+  template:
+    metadata:
+      labels:
+        app: blue
+        track: stable
+        version: 1.0.0
+    spec:
+      containers:
+        - name: solitaire
+          image: mesutguzel/solitaire:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+            - name: health
+              containerPort: 81
+          
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: green-deployment
+spec:
+  replicas: 4
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: green
+  template:
+    metadata:
+      labels:
+        app: green
+    spec:
+      containers:
+      - name: solitaire2
+        image: mesutguzel/solitaire:2.0.0
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 80
+        - name: health
+          containerPort: 81
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blue-green-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: blue
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+

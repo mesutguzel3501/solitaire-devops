@@ -6,7 +6,7 @@ steps:
     "."]
 - id: push
   name: gcr.io/cloud-builders/docker
-  args: ["push", "-a", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:latest"]
+  args: ["push", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:latest"]
 - id: deploy
   name: gcr.io/cloud-builders/gcloud
   args: ["run", "deploy", "$_SERVICE",

@@ -6,25 +6,12 @@ steps:
     "."]
 - id: push
   name: gcr.io/cloud-builders/docker
-  args: ["push", "-a", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE"]
+  args: ["push", "-a", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:latest"]
 - id: deploy
   name: gcr.io/cloud-builders/gcloud
   args: ["run", "deploy", "$_SERVICE",
-    "--image=us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:build-$BUILD_ID",
-    "--platform=managed",
-    "--concurrency=default",
-    "--max-instances=default",
-    "--region=us-central1",
-    "--port=default",
-    "--timeout=60s",
-    "--allow-unauthenticated",
-    "--service-account=$_SERVICE_ACCOUNT",
-    '--set-env-vars=
-    DACS_STATICFILEDIRECTORY=/var/www/static,
-    DACS_DEMODIRECTORY="",
-    DACS_PROJECTBUCKET=$_GCS_BUCKET',
+    "--image=us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:build-$BUILD_ID"
   ]
 substitutions:
-  _SERVICE: docs-as-code-server
-  _SERVICE_ACCOUNT: docs-as-code-server@docs-as-code-agosto.iam.gserviceaccount.com
-  _GCS_BUCKET: agosto-docs-as-code
+  _SERVICE: solitaire
+  

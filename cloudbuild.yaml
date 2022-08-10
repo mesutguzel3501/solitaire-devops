@@ -1,7 +1,7 @@
 steps:
 - id: containerize
   name: gcr.io/cloud-builders/docker
-  args: ["build", "-f", "./docserver/Dockerfile",
+  args: ["build", 
     "-t", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:latest",
     "."]
 - id: push

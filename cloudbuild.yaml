@@ -1,14 +1,8 @@
 steps:
-- id: build
-  name: golang:1.18
-  dir: "docserver/src"
-  args: ["go", "build", "-o", "docserver", "."]
 - id: containerize
   name: gcr.io/cloud-builders/docker
   args: ["build", "-f", "./docserver/Dockerfile",
-    "--build-arg", "environment=${_ENV}",
     "-t", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:latest",
-    "-t", "us-central1-docker.pkg.dev/${PROJECT_ID}/release/$_SERVICE:build-$BUILD_ID",
     "."]
 - id: push
   name: gcr.io/cloud-builders/docker
@@ -34,7 +28,3 @@ substitutions:
   _SERVICE: docs-as-code-server
   _SERVICE_ACCOUNT: docs-as-code-server@docs-as-code-agosto.iam.gserviceaccount.com
   _GCS_BUCKET: agosto-docs-as-code
-  _ENV: prod
-options:
-  env:
-    - GOPROXY=https://proxy.golang.org

@@ -181,7 +181,7 @@ body {
 }
 
 #solitaire-container {
-    background-color: #34A249;
+    background-color:rgb(28, 104, 219);
     position: absolute;
     /* top equals to solitaire.util.NON_BOARD_ELEMENT_HEIGHT */
     top: 56px;

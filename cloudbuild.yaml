@@ -12,5 +12,4 @@ steps:
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: sh
   args: ['-c', 'gcloud run deploy solitaire --image=us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:$(cat VERSION) --platform=managed --concurrency=default --max-instances=default --region=us-central1 --port=80 --timeout=60s --allow-unauthenticated']
-images:
-- 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image'
+

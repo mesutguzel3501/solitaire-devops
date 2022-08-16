@@ -1,6 +1,8 @@
 steps:
 - name: 'gcr.io/cloud-builders/docker'
-  args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:$(cat VERSION)', '.' ]
+  entrypoint: sh
+  args: ['-c', 'docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:$(cat VERSION) . ']
+  # args: [ 'build', '-t', 'us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:$(cat VERSION)', '.' ]
 
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'

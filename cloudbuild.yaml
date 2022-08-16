@@ -6,7 +6,7 @@ steps:
 
 - id: push
   name: gcr.io/cloud-builders/docker
-  args: ["push", "-a", "us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:$(cat VERSION)"]
+  args: ["push", "us-central1-docker.pkg.dev/$PROJECT_ID/quickstart-docker-repo/quickstart-image:$(cat VERSION)"]
 
 - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
   entrypoint: sh
